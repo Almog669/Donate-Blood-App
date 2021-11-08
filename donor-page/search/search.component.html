@@ -1,0 +1,427 @@
+<body>
+  
+  
+<div class = "inputTitle">
+<h3>Type the name of the desired city:</h3>
+ <input type = "text" [(ngModel)]= "Adress"  placeholder="Type desired city" />
+ <button type = "button" (click) = "CityAdress(Adress)"  > Search.. </button>
+ <button (click) = "YourPoint()"> Your point</button>
+</div>
+
+<!--------- Map and Details-------->
+<div class = "SearchDiv">
+  
+    <h2> This map show your Place and The nearest donation places</h2>
+    
+    <div id="map"></div>
+  
+  <div class = "DetailsDev">
+
+        <h3>Details:</h3>
+        <label>
+          <h4> You have: {{K}} nearest spots around</h4>
+          <p *ngFor = "let spot of SPOT"> {{spot}}</p>
+        </label>
+
+        <div class = "btns"><button (click) = "showAppointmentfunc()" (click) = "ShowAskBeforQuesDialog()"> Make an appointment</button>
+             <button > Show Spots Work time </button></div>
+   </div>
+   <div class = "appointment" *ngIf = "showAppointment">
+  
+    <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedDonorAppointments._id">
+     
+      <div class="row">
+        <div class="input-field col s12">
+          <label >Hospital Name: </label><label style = "color:red"> *required</label><br>          
+            <select  name="HospitalName" #name="ngModel" 
+             [(ngModel)]="employeeService.selectedDonorAppointments.HospitalName"
+            >
+            <option  *ngFor = "let t of SPOT"  
+            [value] = "t"> {{t}}
+                </option>
+                
+            </select>      
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <label>Time :</label><label style = "color:red"> *required</label>
+        </div>
+        <select class = "op"
+        name="Time" #name="ngModel"
+         [(ngModel)]="employeeService.selectedDonorAppointments.Time" 
+        required>
+        <option  *ngFor = "let t of Worktime"  
+          [value] = "t"> {{t}}
+        </option>
+      </select>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <label>Day :</label><label style = "color:red"> *required</label>
+        </div>
+      <input type = "date" name="Day" #name="ngModel"
+      [(ngModel)]="employeeService.selectedDonorAppointments.Day" >
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <label>Have you donated in this spot: </label>
+          <input type="checkbox" ngValue = "true" name="DonateBefore"
+           #name="ngModel" [(ngModel)]="employeeService.selectedDonorAppointments.DonateBefore">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button class="btn btn-custom right" type="button" (click)="resetForm(employeeForm)">Reset</button>
+          <button class="btn btn-custom right" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+        </div>
+      </div>
+    </form>
+
+    
+  </div>
+</div>
+
+
+<form #employeeForm="ngForm" (ngSubmit)="SendAnAdressCoordsToDataBase(employeeForm)">
+  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedHospitalCoords._id">
+ 
+
+  <div class="row">
+    <div class="input-field col s12">
+      <label>HospitalName :</label><label style = "color:red"> *required</label>
+    </div>
+    <input type="text" name="HospitalName" #HospitalName="ngModel"[(ngModel)]="employeeService.selectedHospitalCoords.HospitalName">
+
+  </div>
+
+  <div class="row">
+    <label>Coordinates :</label><label style = "color:red"> *required</label>
+    <div class="input-field col s12">
+      <input type="text" name="coordinates" #coordinates="ngModel"[(ngModel)]="employeeService.selectedHospitalCoords.coordinates">
+
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn btn-custom right" type="button" (click)="resetForm(employeeForm)">Reset</button>
+      <button class="btn btn-custom right" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+    </div>
+  </div>
+</form>
+<div   id="modalBefore" *ngIf = "AskBeforQues" class="modal modal--visible" >
+  <div class="modal__bodyBefore">
+    <h3 style = "font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Fill out a Questionnaire before making an appointment. </h3>
+    <div class = "DialogBtns">
+    <button style = "width: 100px; border-radius: 5px; margin-right: 20px; " (click)="ShowQuesBefore()" (click) = "CloseAskBeforeQuesDialog()">Yes</button>
+     <button  style = "width: 100px; border-radius: 5px;" (click) = "CloseAskBeforeQuesDialog()">No</button>
+    </div></div></div>
+
+<div   id="modal" *ngIf = "ShowQues" class="modal modal--visible" >
+  <div class="modal__body"><button (click) = "CloseQuesDonor()" style = "left:95%; position: relative;" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <label><h3 style = "color: blue; background-color:lightseagreen;"> Donor Id: {{Identitiy}}, Name: {{username}} </h3></label>
+  <label><p><h2>Donor questioning before donation: Answer with Yes or No.</h2>
+      </label>
+
+<table id = "customers">
+    
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    
+    <tr >
+      <td>Iam Healthy and i feel good today:</td>
+      <td>
+          <select  [(ngModel)]="CurrentQuesB.Answer[0]"
+          (change) = "YesOrNoToBool($event)">
+            <option [ngValue] = true>
+              Yes
+          </option>
+          <option [ngValue] = false >
+            No
+        </option>
+        </select>
+         
+          
+        </td>
+    </tr>
+    <tr >
+      <td>Get Blood and/or it complex infused in the last six month ago:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[1]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+        </td>
+    </tr>
+    <tr >
+      <td>Get Any Medicine Drugs in the last Month :</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[2]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>Get a vaccine in last month:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[3]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>I underwent extensive dental care in last 7 days:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[4]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>I have been receiving treatment for gonorrhea and / or syphilis for the past 12 months:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[5]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+        </td>
+    </tr>
+    <tr >
+      <td>Hepatitis in last 6 month:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[6]"
+          (change) = "YesOrNoToBool($event)">
+            <option [ngValue] = true>
+              Yes
+          </option>
+          <option [ngValue] = false >
+            No
+        </option>
+        </select>
+        </td>
+    </tr>
+    <tr >
+      <td>Have tattoo/s, Endoscopic procdure with biopsy, Used needle prick :</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[7]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>I suffer from enlarged glands, night sweats, fever, weight loss:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[8]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+           
+        </td>
+    </tr>
+    <tr >
+      <td>I have been visiting abroad for the past 12 months:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[9]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+          
+        </td>
+    </tr>
+    <tr >
+      <td>With malaria above 6 month or get malaria in last 3 years:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[10]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+           
+        </td>
+    </tr>
+    <tr >
+      <td>Suffering from a serious illness such as a malignant disease, a tendency to bleed:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[11]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+        </td>
+
+    </tr>
+    <tr >
+      <td> I have diabetes or cardiac disease, Epilepsy:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[12]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>Any sergical operation before:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[13]"
+      (change) = "YesOrNoToBool($event)">
+        <option [ngValue] = true>
+          Yes
+      </option>
+      <option [ngValue] = false >
+        No
+    </option>
+    </select>
+          
+           
+        </td>
+    </tr>
+    <tr >
+      <td>There is or had before any diseases (Acute Or Chronic):</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[14]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+          
+        </td>
+    </tr>
+
+    <tr >
+      <td>I have been bitten by a foreign animal in the last 2 months:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[15]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+         
+        </td>
+    </tr>
+
+    <tr >
+      <td>For Womens- You are pregnancy:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[16]"
+        >
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+           
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button style = "color:brown;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             width:70px;
+             font-weight: bolder;" (click) = "CheckIfValid()">Check if Valid..</button>
+        </td>
+      </tr>
+        <tr>
+        <td></td>
+        <td><button (click) = "CloseQuesDonor()">Cancel</button></td>
+        </tr>
+   
+  </table>
+  
+  
+
+</div></div>
+
+
+</body>
+
+

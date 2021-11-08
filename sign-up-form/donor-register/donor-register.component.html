@@ -1,0 +1,153 @@
+<div>
+  <label class = "title"> Donor registration</label>
+  
+</div>
+
+<div class = "donorUser" >
+  <form #donorForm="ngForm" (ngSubmit)="onSubmit(donorForm)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="donorService.selectedDonor._id">
+
+    <div class = "firstDiv">
+
+    <div class="row">
+      <div class="input-field">
+        <label>User Name: 
+          <label style = "color:red">* </label>
+        </label><br>
+        <input class = "uname" type="text" name="username" #name="ngModel" [(ngModel)]="donorService.selectedDonor.username" placeholder="Type UserName please" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Password:</label><br>
+      <input class = "pass" type="text" name="password" #name="ngModel" [(ngModel)]="donorService.selectedDonor.password" placeholder="Type Password please" required>
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Confirm Password:</label><br>
+      <input class = "pass" type="text" name="password" placeholder="Type Password again" required>
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Your Id:</label><br>
+      <input class = "pass" type="text" [(ngModel)]="donorService.selectedDonor.identity"
+        name="identity" placeholder="Your personal identity please" required>
+    </div>
+    </div>
+    <div class="pac-card" id="pac-card">
+      <div>
+        <label>Your Address:</label><br>
+        <input  id="pac-input" type="text" placeholder="Enter a location" required/>
+        <div id="pac-container">
+      </div>
+      </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field">
+          <label>Phone Number:</label><br>
+        <input class = "pass" type="text" name="phoneNumber"  #name="ngModel"
+         [(ngModel)]="donorService.selectedDonor.phoneNumber"  placeholder="Phone Number - Must" required>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <label>Agree to receive calls or messages and emails:</label>
+        <input class = "pass" type="checkbox" [(ngModel)]="donorService.selectedDonor.ToUrgent"
+          name="ToUrgent" >
+      </div>
+      </div>
+      
+    </div>
+    <div class = "secondDiv">
+
+      <div class="row">
+        <div class="input-field">
+          <label>Email:</label><br>
+        <input class = "pass" type="text" [(ngModel)]="donorService.selectedDonor.Email"
+          name="Email" placeholder="Email Adress">
+      </div>
+      </div>
+
+    
+    <div  id="map"></div>
+    <div id="infowindow-content">
+      <span id="place-name" class="title"></span><br />
+      <span id="place-address"></span>
+    </div>
+  
+
+    <div class="row">
+      <div class="input-field">
+        <label>Gender:</label>
+        <select class = "op"
+        name="Gender" #name="ngModel" [(ngModel)]="donorService.selectedDonor.Gender" 
+        required>
+        <option  *ngFor = "let g of gender"  
+          [value] = "g"> {{g}} 
+        </option>
+      </select>
+    </div> 
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Age:</label>
+        <select class = "op"
+        name="age" #name="ngModel" [(ngModel)]="donorService.selectedDonor.age" 
+        required>
+        <option  *ngFor = "let a of age"  
+          [value] = "a"> {{a}} 
+        </option>
+      </select>
+    </div> 
+    </div>
+
+    <div class="row">
+    <div class="input-field">
+      <label>Blood type:</label>
+      <select class = "op"
+      name="bloodType" #name="ngModel" [(ngModel)]="donorService.selectedDonor.bloodType" 
+      required>
+      <option  *ngFor = "let t of bloodType"  
+        [value] = "t"> {{t}} 
+      </option>
+    </select>
+  </div> 
+  </div>
+
+  <div class="row">
+    <div class="input-field">
+      <label>Smoke:</label>
+    <input class = "pass" type="checkbox" name="Smoke"  #name="ngModel"
+     [(ngModel)]="donorService.selectedDonor.Smoke" >
+  </div>
+  </div>
+
+  <div>
+    <label style = "color:red">{{DataBaseMsg}}</label>
+  </div>
+
+
+
+  </div>
+
+    <div class="Buttons">
+      <div class="input-field">
+        <button class="btn btn-custom right" type="button" (click)="resetForm(donorForm)">Reset</button>
+        <button class="btn btn-custom right" type="submit" [disabled]="!donorForm.valid" >Submit</button>
+        <button class="btn btn-custom right" type="button" routerLink = "/app-donor" >Back</button>
+        
+      </div>
+    </div>
+  </form>
+  
+  </div>
+
+  

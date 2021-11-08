@@ -1,0 +1,68 @@
+<div>
+  <label class = "title"> Hospital registration</label>
+  
+</div>
+
+<div class = "donorUser" >
+  <form #HosEmp="ngForm" (ngSubmit)="onSubmit(HosEmp)">
+    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="HospitalEmpService.selectedHospitalEmployee._id">
+
+    <div class="row">
+      <div class="input-field">
+        <label>Your Name :</label>
+      <input class = "pass" type="text" name="name" #name="ngModel" [(ngModel)]="HospitalEmpService.selectedHospitalEmployee.name" placeholder="Type Password please">
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>User Name : 
+          <label style = "color:red">* </label>
+        </label>
+        <input class = "uname" type="text" name="username" #name="ngModel" [(ngModel)]="HospitalEmpService.selectedHospitalEmployee.username" placeholder="Type UserName please" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Password :</label>
+      <input class = "pass" type="text" name="password" #name="ngModel" [(ngModel)]="HospitalEmpService.selectedHospitalEmployee.password" placeholder="Type Password please">
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Confirm Password :</label>
+      <input  type="text" [(ngModel)] = "ConfirmPassword" placeholder="Type the same Password.">
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <label>Position:</label>
+      <input class = "pass" type="text" name="position" #name="ngModel" [(ngModel)]="HospitalEmpService.selectedHospitalEmployee.position" placeholder="Your job">
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field">
+        <button class="btn btn-custom right" type="button" (click)="resetForm(HosEmp)">Reset</button>
+        <button class="btn btn-custom right" type="submit" [disabled]="!HosEmp.valid" >Submit</button>
+        <button class="btn btn-custom right" type="button" routerLink = "/app-hospital" >Back</button>
+        
+      </div>
+    </div>
+  </form>
+  <div>
+
+    <label>
+        {{DataBaseMsg}}
+    </label>
+    
+      
+
+
+  </div>
+
+  
+</div>

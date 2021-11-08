@@ -1,0 +1,135 @@
+<body>
+
+<label> <h1>Blood Stock </h1></label> {{now}}<br>
+<hr>
+<label><h3>Blood doses currently in stock now: </h3></label>
+
+  <div >
+    <table class="blueTable" >
+        
+          <tr>
+            <th style = "width:400px;"> Blood Type </th>
+            
+            <th>A</th>
+            <th>B</th>
+            <th>AB</th>
+            <th>O</th>
+            <th>A- </th>
+            <th>B-</th>
+            <th>AB-</th>
+            <th>O-</th>
+            
+          </tr>
+          
+          
+        <tr *ngFor = "let stk of HospitalStock">
+          
+          <td><button   class = "toCount" (click) = "TypeAmount()"
+           (click) = "onEdit(stk._id)"  >Perform an inventory count</button> </td>
+          <td>{{stk.A}} </td>
+          <td>{{stk.B}} </td>
+          <td>{{stk.AB}} </td>
+          <td>{{stk.O}} </td> 
+          <td>{{stk.Am}} </td>
+          <td>{{stk.Bm}} </td>
+          <td>{{stk.ABm}} </td>
+          <td>{{stk.Om}} </td>
+          </tr>
+         
+          <tr>
+            <td>
+              <form *ngIf = "amount" #SForm="ngForm" (ngSubmit)="onSubmit(SForm)">
+              <!-- <input *ngIf = "showBeilinsonForm" type = "hidden" name="_id" #name="ngModel" [(ngModel)]="stockService.selectedBeilinson._id">
+                <input *ngIf = "showAchilovForm" type = "hidden" name="_id" #name="ngModel" [(ngModel)]="stockService.selectedAchilov._id">
+                <input *ngIf = "DynamicForm" type="hidden" name="_id" #_id="ngModel" [(ngModel)]="stockService.selectedDynamicHospitalStock._id">-->
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label>Type A: 
+                      <label style = "color:red"> *</label>
+                    </label>
+                  </div>
+                    <input type="text" name="A" #name="ngModel"
+                    [(ngModel)]="this[stockA]" placeholder="Type new amount" >
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label>Type B:</label>
+                  </div>
+                  <input type="text" name="B" #name="ngModel"
+                  [(ngModel)]="this[stockB]" placeholder="Type new amount"
+                  >
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                  <label>Type AB :</label>
+                </div>
+                <input type="text"  name="AB" #name="ngModel"
+                [(ngModel)]="this[stockAB]" placeholder="Type new amount"
+                >
+               </div>
+               <div class="row">
+                  <div class="input-field col s12">
+                    <label>Type O :</label>
+                  </div>
+                  <input type="text" name="O" #name="ngModel"
+                  [(ngModel)]="this[stockO]" placeholder="Type new amount"
+                  >
+                 </div>
+                 <div class="row">
+                  <div class="input-field col s12">
+                    <label>Type A: 
+                      <label style = "color:red"> *</label>
+                    </label>
+                  </div>
+                    <input type="text" name="Am" #name="ngModel"
+                    [(ngModel)]="this[stockAMinus]" placeholder="Type new amount" >
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <label>Type B:</label>
+                  </div>
+                  <input type="text" name="Bm" #name="ngModel"
+                  [(ngModel)]="this[stockBMinus]" placeholder="Type new amount"
+                  >
+                </div>
+                <div class="row">
+                <div class="input-field col s12">
+                  <label>Type AB :</label>
+                </div>
+                <input type="text"  name="ABm" #name="ngModel"
+                [(ngModel)]="this[stockABMinus]" placeholder="Type new amount"
+                >
+               </div>
+               <div class="row">
+                  <div class="input-field col s12">
+                    <label>Type O :</label>
+                  </div>
+                  <input type="text" name="Om" #name="ngModel"
+                  [(ngModel)]="this[stockOMinus]" placeholder="Type new amount"
+                  >
+                 </div>
+
+
+                <div class="row">
+                  <div class="input-field" for = "stock">
+                    
+                    <button class="btn btn-custom right" type="button" (click)="resetForm(SForm)">Reset</button>
+                    <button class="btn btn-custom right" type="submit" [disabled]="!SForm.valid">Update Stock</button>
+                  </div>
+                </div>
+              </form>
+              
+            </td>
+
+            
+
+          </tr>
+          <h3>{{message}}</h3>
+      </table>
+</div>
+
+
+
+
+</body>

@@ -1,0 +1,542 @@
+<body>
+  <label><h3>Donors Appointments: </h3><h4> In {{HospitaNameObserve}} Hospital:</h4></label>
+ <label>Time : {{now}}</label>
+    <div class = "FilterListDiv">
+      <label style = "font-weight: bold;">Filter List By:</label><br>
+
+      <div>
+    
+        <input type="radio"
+        id = "All" name = "All" [(ngModel)]="selected"
+         value="All"
+         (click) = "GetAllAppointments()"> All
+
+        <input type="radio"
+       id = "Yesterday" name = "Yesterday" [(ngModel)]="selected"
+        value="Yesterday"
+        (click) = "GetYesterdayAppointments()"> Yesterday
+
+      <input type="radio"
+       id = "Today" name = "Today" [(ngModel)]="selected"
+        value="Today"
+        (click) = "GetTodayAppointments()" checked> Today
+
+      <input type="radio"
+       id = "Tomorrow" name = "Tomorrow" [(ngModel)]="selected"
+        value="Tomorrow"
+        (click) = "GetTomorrowAppointment()"> Tomorrow
+
+      <input type="radio"
+       id = "Month" name = "Month" [(ngModel)]="selected"
+        value="Month"
+        (click) = "GetAppointmentsByMonth();"> Month
+    
+      </div>
+    
+    
+   
+
+    </div>
+
+ <!-- <select  class = "Days"  [(ngModel)]="OneDay"
+  required>
+
+  <option  *ngFor = "let d of days"  
+  [ngValue] = "d"> {{d}}
+</option>
+  </select>  
+  <br>-->
+
+  <div class="ShowAppointmentsDiv">
+    <table class="responsive-table" >
+        
+      <tr class = "firstRow">
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Pre-Action</th>
+        <th></th>
+        <th>Post-Action</th>
+        
+
+
+      </tr>
+          <tr>
+            <th>Id No</th>
+            <th>Age</th>
+            <th>Donor</th> <!--username-->
+            <th>Gender</th>
+            <th>Time</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Type</th>
+            <th>Was</th>
+            <th>Valid</th>
+            <th>Quest</th>
+            <th>Arrived</th>
+            <th>Quest</th>
+            <th>Option</th>
+          </tr>
+        
+        <tr *ngFor="let emp of DayFilter" >
+          <td>{{emp.identity}}</td>
+          <td>{{emp.age}}</td>
+          <td>{{emp.UserName}}</td>
+          <td>{{emp.Gender}}</td>
+          <td>{{emp.Time}}</td>
+          <td>{{emp.Email}}</td>
+          <td>{{emp.phoneNumber}}</td>
+          <td style = "cursor: pointer;" (click) = "IfBloodTypeDontKnow(emp._id)">{{emp.bloodType}}</td>
+          <td>{{emp.DonateBefore}}</td>
+          <td><div *ngIf ="ShowValidImage" ><img class = "V" src = "assets/check.png" *ngIf = "emp.Valid"  >
+            <img class = "V" src = "assets/x.png" *ngIf = "!emp.Valid" ></div></td>
+          <td><button (click) = "ShowQuesDonor(emp._id)">Before</button></td>
+          <td><input type = "checkbox"></td>
+          <td><button (click) = "ShowQuesDonorAfter(emp._id)">After</button></td>
+          <td><button class="action-btn" (click)="onDelete(emp._id)"
+               style="color:red">Delete</button>
+            </td>
+        </tr>
+      </table>
+     
+</div>
+
+<div *ngIf = "ShowAfterQ" id="modal" class="modal modal--visible">
+  <div class="modal__body"><button (click) = "CloseQuesDonorAfter()" style = "left:95%; position: relative;" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <label style = "Color:red; font-size: 20px;
+     font-weight: bolder; 
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{RadioValueQuesA}}</label>
+  <label><p><h2>For use Blood bank.</h2>
+  <label>  <label><h3 style = "color: blue; background-color:lightseagreen;"> Donor Id and Name: {{DonorInDialog}}</h3></label>
+  <label><h3 style = "color: blue; background-color:lightseagreen;"> Donating Date: {{DonateDate}} Your Next Donate Should be at: {{Next3Month}}</h3></label>
+</label>
+
+</label>
+<label style="background-color: dodgerblue; font-size: 17px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Employee: {{HospitalEmployee}}, Position: {{Position}} </label>
+<table>
+
+  <tr class = "WithoutB">
+    <th>Type of Donation: </th>
+    <th><input type = "checkbox" id = "WholeBlood" 
+      name = "wholeblood"  #wholeblood = "ngModel"
+       [(ngModel)] = "this.CurrentQuesA.WholeBlood">Whole blood.</th>
+
+    <th><input type = "checkbox" id = "Apheresis" 
+      name = "Apheresis"  #Apheresis = "ngModel"
+       [(ngModel)] = "this.CurrentQuesA.Apheresis">Apheresis.</th>
+
+    <th><input type = "checkbox"  id = "Self" 
+      name = "Self"  #Self = "ngModel"
+       [(ngModel)] = "this.CurrentQuesA.Self" >Self.</th>
+
+
+    <th><input type = "checkbox"  id = "letting" 
+      name = "letting" #letting = "ngModel"
+       [(ngModel)] = "this.CurrentQuesA.letting">bloodletting.</th>
+
+    <th><input type = "checkbox"  id = "StemCells" 
+      name = "StemCells" #StemCells = "ngModel"
+       [(ngModel)] = "this.CurrentQuesA.StemCells">Stem cells.</th>
+    
+  </tr>
+
+  <tr class = "WithoutB0">
+    <td>Blood Pressure:</td>
+    <td>Heart rate:</td>
+    
+  </tr>
+  <tr class = "WithoutB0" >
+    <th><input type = "number" id = "SystolicNumber" min = "0" max = "300" 
+      name = "SystolicNumber" #SystolicNumber = "ngModel"
+       [(ngModel)] = "this.CurrentQuesA.SystolicNumber">
+
+       <input type = "number" id = "DiastolicNumber" min = "0" max = "150"  
+        name = "DiastolicNumber" #DiastolicNumber = "ngModel"
+         [(ngModel)] = "this.CurrentQuesA.DiastolicNumber"></th>
+
+    <th><input type = "number" id = "HrNumber" min="0" max = "350"
+       name = "HrNumber" #HrNumber = "ngModel"
+      [(ngModel)] = "this.CurrentQuesA.HrNumber"></th>
+  
+  </tr>
+
+  <tr class = "WithoutB1">
+    <th>Blood Count Test:</th>
+    <th><select><option>In Range.</option><option>Not in Range.</option></select></th>
+    <th>Explain: <input id = "ExplainIn" type = "text"></th>
+  </tr>
+  
+  <tr class = "WithoutB1">
+    <th>Whole blood: {{RandomNum}}</th> 
+    <th><input type = "radio">Up to 12 Minutes</th>
+    <th><input type = "radio">Over 12 Minutes.</th>
+  </tr>
+
+  <tr class = "WithoutB2">
+    <th> Abnormal response: </th>
+    <th><input type = "checkbox" value = "1" [(ngModel)]="ForAfterQuesResponse" checked>Yes</th>
+    <th><input type = "checkbox" value = "2">No</th>
+    
+  </tr>
+  <tr class = "WithoutB2"  *ngIf = "ForAfterQuesResponse">
+    <th><input type = "checkbox">Feeling Bad</th>
+    <th><input type = "checkbox">Syncope</th>
+    <th><input type = "checkbox">Wounding</th>
+    <th><input type = "checkbox">Hematoma</th>
+    <th><input type = "checkbox">Stopping flow</th>
+    <th>Else:<input type = "text" style = "width:50px;"></th>
+  </tr>
+
+  <tr class = "trFinish">
+
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th><button (click) = "FinishQuesAfter()" style = "width:100px;height: 70px; font-size: 15px;">Finish</button></th>
+
+  </tr>
+
+
+  
+
+</table>
+<!--<table class = "InfoDiv">
+  <tr>
+    <td>Sys Max:</td>
+    <td>Sys Min:</td>
+    <td>Dia Max:</td>
+    <td>Dia Min:</td>
+    <td>H-Rate:</td>
+  </tr>
+
+  <tr>
+    <th>140mm Hg</th>
+    <th>90mm Hg</th>
+    <th>90mm Hg</th>
+    <th>60mm Hg</th>
+    <th>Min:60, Max:90</th>
+
+  </tr>
+</table>-->
+
+
+
+  </div>
+</div>
+
+
+<div   id="modal" *ngIf = "ShowQues" class="modal modal--visible" >
+  <div class="modal__body"><button (click) = "CloseQuesDonor()" style = "left:95%; position: relative;" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <label><h3 style = "color: blue; background-color:lightseagreen;"> Donor Id and Name: {{DonorInDialog}}</h3></label>
+  <label><p><h2>Donor questioning before donation: Answer with Yes or No.</h2>
+      </label>
+
+<table id = "customers">
+    
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    
+    <tr >
+      <td>Iam Healthy and i feel good today:</td>
+      <td>
+          <select  [(ngModel)]="CurrentQuesB.Answer[0]"
+          (change) = "YesOrNoToBool($event)">
+            <option [ngValue] = true>
+              Yes
+          </option>
+          <option [ngValue] = false >
+            No
+        </option>
+        </select>
+         
+          
+        </td>
+    </tr>
+    <tr >
+      <td>Get Blood and/or it complex infused in the last six month ago:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[1]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+        </td>
+    </tr>
+    <tr >
+      <td>Get Any Medicine Drugs in the last Month :</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[2]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>Get a vaccine in last month:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[3]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>I underwent extensive dental care in last 7 days:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[4]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>I have been receiving treatment for gonorrhea and / or syphilis for the past 12 months:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[5]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+        </td>
+    </tr>
+    <tr >
+      <td>Hepatitis in last 6 month:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[6]"
+          (change) = "YesOrNoToBool($event)">
+            <option [ngValue] = true>
+              Yes
+          </option>
+          <option [ngValue] = false >
+            No
+        </option>
+        </select>
+        </td>
+    </tr>
+    <tr >
+      <td>Have tattoo/s, Endoscopic procdure with biopsy, Used needle prick :</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[7]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>I suffer from enlarged glands, night sweats, fever, weight loss:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[8]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+           
+        </td>
+    </tr>
+    <tr >
+      <td>I have been visiting abroad for the past 12 months:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[9]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+          
+        </td>
+    </tr>
+    <tr >
+      <td>With malaria above 6 month or get malaria in last 3 years:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[10]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+           
+        </td>
+    </tr>
+    <tr >
+      <td>Suffering from a serious illness such as a malignant disease, a tendency to bleed:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[11]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+           
+        </td>
+    </tr>
+    <tr >
+      <td> I have diabetes or cardiac disease, Epilepsy:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[12]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+        </td>
+    </tr>
+    <tr >
+      <td>Any sergical operation before:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[13]"
+      (change) = "YesOrNoToBool($event)">
+        <option [ngValue] = true>
+          Yes
+      </option>
+      <option [ngValue] = false >
+        No
+    </option>
+    </select>
+          
+           
+        </td>
+    </tr>
+    <tr >
+      <td>There is or had before any diseases (Acute Or Chronic):</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[14]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+          
+        </td>
+    </tr>
+
+    <tr >
+      <td>I have been bitten by a foreign animal in the last 2 months:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[15]"
+        (change) = "YesOrNoToBool($event)">
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+          
+         
+        </td>
+    </tr>
+
+    <tr >
+      <td>For Womens- You are pregnancy:</td>
+      <td>
+        <select  [(ngModel)]="CurrentQuesB.Answer[16]"
+        >
+          <option [ngValue] = true>
+            Yes
+        </option>
+        <option [ngValue] = false >
+          No
+      </option>
+      </select>
+         
+           
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <button style = "color:brown;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             width:70px;
+             font-weight: bolder;" (click) = "CheckIfValid()">Check if Valid..</button>
+        </td>
+      </tr>
+        <tr>
+        <td></td>
+        <td><button (click) = "CloseQuesDonor()">Cancel</button></td>
+        </tr>
+   
+  </table>
+  
+  
+
+</div>
+</div>
+
+
+</body>
+

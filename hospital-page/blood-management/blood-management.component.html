@@ -1,0 +1,128 @@
+<body>
+
+
+<table id = "customers">
+
+    <tr>
+            <th>E-R Trauma</th>
+            <th><button class = "send" >Send</button></th>
+              <th><button class = "send" (click) = "showTypes()">Send Another</button> </th>
+               
+            <td>A:{{A}}</td>
+            <td>B:{{B}}</td>
+            <td>AB:{{AB}}</td>
+            <td>O:{{O}}</td>
+            <td>A-:{{AMinus}}</td>
+            <td>B-:{{BMinus}}</td>
+            <td>AB-:{{ABMinus}}</td>
+            <td>O-:{{OMinus}}</td>
+    </tr>
+
+    <tr>
+        <th>Medical Section A</th>
+        <th><button class = "send" >Send</button></th>
+          <th><button class = "send" (click) = "showTypes()">Send Another</button>
+            </th>
+            <td>A:{{A2}}</td>
+            <td>B:{{B2}}</td>
+            <td>AB:{{AB2}}</td>
+            <td>O:{{O2}}</td>
+            <td>A-:{{AMinus2}}</td>
+            <td>B-:{{BMinus2}}</td>
+            <td>AB-:{{ABMinus2}}</td>
+            <td>O-:{{OMinus2}}</td>
+
+    </tr>
+
+
+    <tr>
+        <th>Maternity ward Department </th>
+        <th><button class = "send" >Send</button></th>
+           <th> <button class = "send" (click) = "showTypes()">Send Another</button>
+            </th>
+            <td>A:{{A1}}</td>
+            <td>B:{{B1}}</td>
+            <td>AB:{{AB1}}</td>
+            <td>O:{{O1}}</td>
+            <td>A-:{{AMinus1}}</td>
+            <td>B-:{{BMinus1}}</td>
+            <td>AB-:{{ABMinus1}}</td>
+            <td>O-:{{OMinus1}}</td>
+
+    </tr>
+    <tr>
+        <th>Surgical Department</th>
+        <th><button class = "send" >Send</button></th>
+           <th> <button class = "send" (click) = "showTypes()">Send Another</button>
+            </th>
+            <td>A:{{A3}}</td>
+            <td>B:{{B3}}</td>
+            <td>AB:{{AB3}}</td>
+            <td>O:{{O3}}</td>
+            <td>A-:{{AMinus3}}</td>
+            <td>B-:{{BMinus3}}</td>
+            <td>AB-:{{ABMinus3}}</td>
+            <td>O-:{{OMinus3}}</td>
+    </tr>
+    <tr>
+        <th>Orthopedic Section </th>
+        <th><button class = "send" >Send</button></th>
+          <th> <button class = "send" (click) = "showTypes()">Send Another</button>
+            </th>
+            <td>A:{{A14}}</td>
+            <td>B:{{B14}}</td>
+            <td>AB:{{AB14}}</td>
+            <td>O:{{O14}}</td>
+            <td>A-:{{AMinus14}}</td>
+            <td>B-:{{BMinus14}}</td>
+            <td>AB-:{{ABMinus14}}</td>
+            <td>O-:{{OMinus14}}</td>
+    </tr>
+    <tr>
+        <th>Dialysis</th>
+        <th><button class = "send" >Send</button>
+         <th><button class = "send" (click) = "showTypes()">Send Another</button>
+            </th>
+            <td>A:{{A25}}</td>
+            <td>B:{{B25}}</td>
+            <td>AB:{{AB25}}</td>
+            <td>O:{{O25}}</td>
+            <td>A-:{{AMinus25}}</td>
+            <td>B-:{{BMinus25}}</td>
+            <td>AB-:{{ABMinus25}}</td>
+            <td>O-:{{OMinus25}}</td>
+    </tr>
+    
+</table>
+<div class = "container">
+
+<div class = "btns">
+
+</div>
+
+<div *ngIf = "types" class = "typesInput">
+<label><h3>Send How much we  can</h3></label><br>
+<label>Type A:</label>
+<input type = "text"><br>
+<label>Type B:</label>
+<input type = "text"><br>
+<label>Type AB:</label>
+<input type = "text"><br>
+<label>Type O:</label>
+<input type = "text"><br>
+<label>Type A-:</label>
+<input type = "text"><br>
+<label>Type B-:</label>
+<input type = "text"><br>
+<label>Type AB-:</label>
+<input type = "text"><br>
+<label>Type O-:</label>
+<input type = "text"><br>
+<button class = "send" >Send</button>
+</div>
+
+</div>
+
+
+
+</body>

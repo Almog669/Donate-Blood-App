@@ -1,0 +1,38 @@
+<body *ngIf = "isShow">
+
+<ul class="topnav">
+  <li><a [routerLink] = "[{ outlets: { DonorDisplay: ['app-search']}}]" (click)="toggle()">Find a Spot to Donate</a></li>
+  <li><a [routerLink] = "[{ outlets: { DonorDisplay: ['app-donor-his']}}]" (click)="toggle()">Show Donates History.</a></li>
+  <li><a [routerLink] = "[{ outlets: { DonorDisplay: ['before']}}]" (click)="toggle()">Before Donate</a></li>
+  <li><a [routerLink] = "[{ outlets: { DonorDisplay: ['after']}}]" (click)="toggle()">After Donate</a></li>
+  <li><a [routerLink] = "[{ outlets: { DonorDisplay: ['risks']}}]" (click)="toggle()">Risks</a></li>
+  <li class="r"><div class="dropdown"><a><img id = "AvatarImg" src="assets/avatar_m.jpg"></a>
+    <div class="dropdown-content">
+      <label>User name: {{username}}</label><br>
+      <label>Blood type: {{BloodType}} </label>
+      <hr>
+      <div id ="setting">
+      <a>Profile</a>
+      <a>Settings</a>
+      </div>
+      
+    </div>
+    </div>
+  </li>
+ <!--<li class="right"><a><img id = "AvatarImg" src="assets/avatar_m.jpg"></a></li>-->
+  <li class="right"><a href="#about" (click)="toggle()" >Exit</a></li>
+</ul>
+<hr>
+<div *ngIf = "inter"  style = "left:1%; top:15%; position: relative;">
+  <h1 style = "font-size:70px; font-weight: bolder;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:rgb(228, 48, 48)">Hello {{username}} </h1>
+  <h2 style = "font-size:55px;">We appreciate your help.</h2>
+  <div class = "logo">
+    <img  src="assets/heart.png"/>
+    </div>
+  </div>
+<div>
+ <router-outlet name = "DonorDisplay"></router-outlet>
+</div>
+
+</body>

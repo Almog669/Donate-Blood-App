@@ -1,0 +1,32 @@
+<body>
+
+<div class= "dlogin1">
+
+<label>User Name:</label>
+<input type = "text" placeholder=" Email,UserName" [(ngModel)]= "username"/>
+
+
+</div>
+
+
+<div class= "dlogin2">
+
+    
+    <label>Password: </label>
+    <input type = "password" [(ngModel)]= "password" placeholder="App Password" /><br><br><br>
+    
+    
+      <label id = "message">{{message}}</label>
+    
+
+    <div class = "buttons">
+    <button class = "btn1"   (click) = "Username()" 
+                              (click) = "showDonor()" 
+                            >Connect..</button>
+    
+    <button class = "btn2" routerLink = "/app-donor-register" > Register</button>
+    <button class = "btn3"> Exit</button>
+    </div>
+    </div> 
+
+</body>

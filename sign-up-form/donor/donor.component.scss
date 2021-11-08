@@ -1,0 +1,92 @@
+.dlogin1{
+
+position: relative;
+width:450px;
+height: 150px;
+
+
+}
+.dlogin1 > input
+{
+    position: relative;
+    top:25%;
+    right:2%;
+    width:200px;
+
+}
+.dlogin1 > label{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    left:35%;
+}
+.dlogin2{
+
+    position: relative;
+    width:450px;
+    height: 250px;
+    
+
+
+}
+.dlogin2 > input
+{
+    position: relative;
+    top:15%;
+    width:200px;
+    right:0%;
+
+}
+.dlogin2 > label{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    left:35%;
+    
+}
+.buttons{
+    position: relative;
+    width:100px;
+    display: block;
+    height:120px;
+    margin-right: auto;
+    margin-left: auto;
+    top:25%;
+   
+    
+
+}
+.buttons > .btn1
+{
+    position: relative;
+    width:100px;
+    height:30px;
+    font-weight: bolder;
+}
+.buttons > .btn2
+{
+    position: relative;
+    top:10%;
+    width:100px;
+    height:30px;
+    font-weight: bolder;
+}
+.buttons > .btn3
+{
+    position: relative;
+    top:20%;
+    width:100px;
+    height:30px;
+    font-weight: bolder;
+}
+#message{
+    
+    position: relative;
+    color:blue;
+    font-size: 15px;
+    font-style: bolder;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

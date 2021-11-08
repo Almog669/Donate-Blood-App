@@ -1,0 +1,210 @@
+<body >
+  
+
+    <div class = "buttons">
+
+    <button (click) = "showOrder()" >Order Blood Doses</button><br>
+    <button (click) = "showReceive()">Receive Orders</button><br>
+    <button (click) = "ShowOrdersAccepted()">Orders Accepted.</button><br>
+
+    </div>
+<div class = "title"><h2 style = "color: rgb(255, 0, 0);
+ font-family: Georgia, 'Times New Roman', Times, serif;">Request And Receive Orders From Magen David Adom.</h2></div>
+<div class = "container">
+
+    <div class = "Orders Accepted" *ngIf = "ordersAccepted">
+
+      <table id = customers>
+        <tr>
+          <th>Accepted to Stock Date</th>
+                <th>Type A </th>
+                <th>Type B</th>
+                <th>Type AB</th>
+                <th>Type O</th>
+                <th>Type A- </th>
+                <th>Type B-</th>
+                <th>Type AB-</th>
+                <th>Type O-</th>
+        </tr  >
+        <tr *ngFor = "let stk1 of StaticOrdersAccepted">
+                <td>{{stk1.Date}} </td>
+                <td>{{stk1.A}} </td>
+                <td>{{stk1.B}} </td>
+                <td>{{stk1.AB}} </td>
+                <td>{{stk1.O}} </td>
+                <td>{{stk1.Am}} </td>
+                <td>{{stk1.Bm}} </td>
+                <td>{{stk1.ABm}} </td>
+                <td>{{stk1.Om}} </td>
+
+                </tr>
+
+      </table>
+
+
+
+    </div>
+
+    <div class = "OrderFromMda" *ngIf = "OrderFromMada">
+      
+      <div class = "TimeHosNameDiv"> 
+      <label><strong>{{now}}</strong> <br> <label>  
+        Organization: {{HospitalNameDisplay}} Hospital.
+      </label ></label> <label *ngIf = "NotEnoughInMadaStock"><h3 style = "color:red; background-color: black;" >
+        Your request denied, there not enough blood units in Mada stock try again Tomorrow please.</h3></label>
+      <label *ngIf = "OrderAcceptedInMada"><h3 style = "color:rgb(25, 0, 255); background-color: rgb(250, 250, 250);" >
+        Your Order Accepted in Mada Orders List</h3></label>
+        <label *ngIf = "OrderInProcessinMada"><h3 style = "color:rgb(200, 231, 23); background-color: rgb(138, 89, 228);" >
+          Prepare your order now for shipping from Mada </h3></label>
+          <label *ngIf = "OrderInWay"><h3 style = "color:rgb(23, 231, 85); background-color: rgb(138, 89, 228);" >
+          Your order have been shipping now to you.</h3></label>   
+    </div>
+    <hr>
+   
+      <form #AchilovForm="ngForm" (ngSubmit)="onSubmit(AchilovForm)" >
+        <input *ngIf = "AchilovFormOrders"   type="hidden" name="_id" #_id="ngModel" [(ngModel)]="stockService.selectedAchilovOrder._id">
+        <input *ngIf = "BeilinsonFormOrders" type="hidden" name="_id" #_id="ngModel" [(ngModel)]="stockService.selectedBeilinsonOrder._id">
+        <input *ngIf = "DynamicFormOrders"   type="hidden" name="_id" #_id="ngModel" [(ngModel)]="stockService.selectedDynamicHospital._id">
+      
+          <div class = "orders1">
+          <label> Blood Type: </label><br>
+
+          <label>A:</label><br>
+          <input type = "number" min = "0" max = "50"
+           [(ngModel)]="this[stockA]"  name="A" #name="ngModel">
+           <label>Up to 50.</label> 
+            <br>
+
+          <label>B:</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockB]"  name="B" #name="ngModel">
+           <label>Up to 50.</label> 
+          <br>
+
+          <label>AB:</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockAB]"  name="AB" #name="ngModel">
+          <label>Up to 50.</label> 
+          <br>
+
+          <label>O:</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockO]"  name="O" #name="ngModel">
+          <label>Up to 50.</label>  
+          <br>
+
+        </div>
+
+          <div class = "orders2">
+          
+          <label> Blood Type: </label><br>
+
+          <label>A -Minus:</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockAMinus]"  name="Am" #name="ngModel">
+          <label>Up to 50.</label>
+          <br>
+
+          <label>B -Minus:</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockBMinus]"  name="Bm" #name="ngModel">
+          <label>Up to 50.</label>
+          <br>
+
+          <label>AB -Minus:</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockABMinus]"  name="ABm" #name="ngModel">
+          <label>Up to 50.</label> 
+          <br>
+
+          <label>O -Minus</label><br>
+          <input type = "number" min = "0" max = "50"
+          [(ngModel)]="this[stockOMinus]"  name="Om" #name="ngModel">
+          <label>Up to 50.</label> 
+          <br>
+               </div>
+
+          <div class = "orders3">
+          
+
+         <p>
+          <button class="btn btn-custom right" type="button" (click)="resetForm(AchilovForm)">Reset</button>
+          <button class="btn btn-custom right" type="submit" [disabled]="!AchilovForm.valid">Send Order To Mada</button>
+        </p>
+
+      </div>
+
+      </form>
+
+    </div>
+
+<div class = "receiveAnOrder" *ngIf = "receiveAnOrder">
+    <label> <h1>Receive Blood Doses</h1></label> {{now}}
+    <hr>
+    
+    <div class = "StockDiv">
+      <h4> {{HospitalNameDisplay}} Stock Now: </h4>
+        <table>
+          <tr *ngFor = "let mda of DynamicStock | slice: 0:1">
+            <th>Type A : {{mda.A}}</th>
+            <th>Type B : {{mda.B}}</th>
+            <th>Type AB: {{mda.AB}}</th>
+            <th>Type O : {{mda.O}}</th>
+            <th>Type A : {{mda.Am}}</th>
+            <th>Type B : {{mda.Bm}}</th>
+            <th>Type AB: {{mda.ABm}}</th>
+            <th>Type O : {{mda.Om}}</th>
+            </tr>
+        </table>
+
+    </div>
+      <div >
+        <table class="blueTable" >
+
+              <tr >
+                
+                <th> Click to Add order to the Stock </th>
+                <th>Type A </th>
+                <th>Type B</th>
+                <th>Type AB</th>
+                <th>Type O</th>
+                <th>Type A- </th>
+                <th>Type B-</th>
+                <th>Type AB-</th>
+                <th>Type O-</th>
+                <th></th>
+
+              </tr>
+
+              <tr *ngFor="let stk1 of DynamicStock | slice:1:DynamicStock.length let i = index" >
+                
+                <td><button  class = "toCount" (click) = "TypeAmount()"
+                  (click) = "AddOrderByDialog(stk1._id)" >Add this Recived Order </button>
+                   - ({{i+1}}) <button (click) = "onDeleteStock(stk1._id)">Delete Order</button> </td>
+                
+                <td>{{stk1.A}} </td>
+                <td>{{stk1.B}} </td>
+                <td>{{stk1.AB}} </td>
+                <td>{{stk1.O}} </td>
+                <td>{{stk1.Am}} </td>
+                <td>{{stk1.Bm}} </td>
+                <td>{{stk1.ABm}} </td>
+                <td>{{stk1.Om}} </td>
+                <td><div id="modal" *ngIf = "DialogNewOrdersActivate" class="modal modal--visible">
+                  <div class="modal__body">
+                    <h2>Do you want to Add this New Order.</h2>
+                    <button id="closeBtn" (click) = "AddAndPost()"  >Yes</button>
+                    <button id="closeBtn"  (click) = "DeActivateAddOrderDialog()">No</button>
+                  </div>
+                </div></td>
+                </tr>
+                
+          </table>
+    </div>
+
+</div>
+
+    </div>
+
+
+    </body>

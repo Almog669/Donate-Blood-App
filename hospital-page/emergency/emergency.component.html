@@ -1,0 +1,36 @@
+<button class = "EmergencyBtn">Emergency Call</button>
+
+<body>
+ 
+    <h3 style = "color:blue">{{FormattedHospitalName}}</h3>
+    
+
+    <table class = "rwd-table">
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Distance</th>
+            <th>Questioner</th>
+            <th>Duration</th>
+            <th>Score</th>
+            <th>Age</th>
+            <th>Smoking</th>
+
+        </tr>
+        <tr *ngFor = "let em of All_emergencyData">
+            <td>{{em.id}}</td>
+            <td>{{em.name}}</td>
+            <td>{{em.address}}</td>
+            <td>{{em.distance}}</td>
+            <td>{{em.questioner}}</td>
+            <td>{{em.duration}}</td>
+            <td>{{em.score}}</td>
+            <td>{{em.age}}</td>
+            <td>{{em.smoking}}</td>
+        </tr>
+    </table>
+
+
+
+</body>

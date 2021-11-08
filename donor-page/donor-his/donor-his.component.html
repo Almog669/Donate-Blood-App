@@ -1,0 +1,26 @@
+
+<body>
+ 
+    
+
+    <table class = "rwd-table">
+        <tr>
+            <th>Your name:</th>
+            <th>Your Id:</th>
+            <th>Where Donate Before:</th>
+            <th>Donated Date:</th>
+           
+
+        </tr>
+        <tr *ngFor = "let em of StaticDonorHis">
+            <td>{{em.username}}</td>
+            <td>{{em.identity}}</td>
+            <td>{{em.HospitalName}}</td>
+            <td>{{em.Date}}</td>
+            
+
+        </tr>
+    </table>
+
+
+</body>

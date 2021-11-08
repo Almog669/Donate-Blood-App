@@ -1,0 +1,245 @@
+table.blueTable {
+    border: 1px solid #59a5d8;
+    background-color: #ffffff;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+  }
+  table.blueTable td, table.blueTable th {
+    border: 1px solid #AAAAAA;
+    padding: 3px 2px;
+  }
+  table.blueTable tbody td {
+    font-size: 11px;
+  }
+  table.blueTable tr:nth-child(even) {
+    background: #19568b;
+  }
+  table.blueTable thead {
+    background: #d67b31;
+    background: -moz-linear-gradient(top, #aab3b9 0%, #327cad 66%, #1C6EA4 100%);
+    background: -webkit-linear-gradient(top, #5592bb 0%, #d1c40e 66%, #1C6EA4 100%);
+    background: linear-gradient(to bottom, #5592bb 0%, #a9cbe2 66%, #1C6EA4 100%);
+    border-bottom: 2px solid #444444;
+  }
+  table.blueTable thead th {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-left: 2px solid #D0E4F5;
+  }
+  table.blueTable thead th:first-child {
+    border-left: none;
+  }
+
+  table.blueTable tfoot {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #D0E4F5;
+    background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    background: -webkit-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #D0E4F5 100%);
+    border-top: 2px solid #444444;
+  }
+  table.blueTable tfoot td {
+    font-size: 12px;
+  }
+  table.blueTable tfoot .links {
+    text-align: right;
+  }
+  table.blueTable tfoot .links a{
+    display: inline-block;
+    background: #1C6EA4;
+    color: #FFFFFF;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .toCount
+  {
+      width:auto;
+      height:30px;
+      font-weight: bolder;
+      font-size:14px;
+
+  }
+  .save
+  {
+      width:auto;
+      height:20px;
+      font-weight: bolder;
+      font-size:15px;
+      margin-top: 10px;
+      margin-left:10px;
+  }
+  .container
+  {
+    position: relative;
+    width:800px;
+    border:solid;
+    border-width: 10px;
+    border-radius: 7px;
+    height:400px;
+    margin-left:350px;
+    top:-100px;
+    overflow: auto;
+    text-align:justify;
+  }
+  .buttons >button
+  {
+
+    position: relative;
+    margin-top:20px;
+    width:270px;
+    height: 40px;
+    font-size: 25px;
+    font-weight: bolder;
+    border: solid;
+    border-radius:10px;
+
+  }
+  .buttons
+  {
+    position: relative;
+    margin:10px;
+    top:20px;
+    width:250px;
+    height: 80px;
+
+
+  }
+  .OrderFromMda
+  {
+    position: relative;
+
+      width:100%;
+      height: 100%;
+  }
+  .receiveAnOrder
+  {
+    position: relative;
+    width:100%;
+    height: 100%;
+  }
+
+
+  button {
+    font-family: Arial, sans-serif;
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #cfd8dc;
+  }
+
+  button:disabled {
+    background-color: #eee;
+    color: #ccc;
+    cursor: auto;
+  }
+  .TimeHosNameDiv
+  {
+    background-color: aqua;
+  }
+  .title{
+    position: relative;
+    left:350px;
+    top:-80px;
+  }
+  .orders1{
+    position: relative;
+    
+    width:200px;
+  }
+  .orders2{
+    position: relative;
+    left:202px;
+    top:-178px;
+    width:200px;
+    
+    
+  }
+  .orders3{
+    position: relative;
+    left:402px;
+    top:-290px;
+    width:200px;
+    height: 150px;
+   
+  }
+  .StockDiv
+  {
+      position:relative;
+      width:auto;
+      height: auto;
+      border:double;
+      
+
+  }
+  .StockDiv > table 
+  {
+    position: relative;
+    top:-10px;
+    left:0px;
+  }
+  .StockDiv > table >tr >th
+  {   
+      border-right: double;
+      
+  }
+  #customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
+  .modal {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+  
+    &--visible {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    &__body {
+      width: 400px;
+      height: 200px;
+      padding: 1rem;
+      border:solid;
+      border:blue;
+      border-width: 10px;
+      border-radius: 10px;
+      text-align: center;
+      background: #fff;
+    }
+  }
+ 
+

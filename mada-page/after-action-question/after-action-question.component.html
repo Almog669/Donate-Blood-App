@@ -1,0 +1,48 @@
+<body>
+<div>
+  <label><p><h2>Donor questioning before donation: Answer with Yes or No.</h2>
+  </label>
+  <div class="container">
+    <div class="col-md-12">
+      <form class="container" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+        <input type="text" name="firstname" placeholder="first name" formControlName="firstname">
+        <br>
+        <input type="text" name="lastname" placeholder="last name" formControlName="lastname">
+        ֿ
+        <div> donation type:<br>
+          <select name="languages"  formControlName="languages">
+            <option value="full blood">full blood</option>
+            <option value="self">self</option>
+            <option value="blood letting">blood letting</option>
+            <option value="stem cell">stem cell</option>
+
+          </select>
+        </div>
+        <p>donate duration:</p>
+        <div>
+          <label for="morethan12">     <input type="radio" id="morethan12" name="duration" value="morethan12"> more than 12 minutes</label>
+          <label for="lessthan12">
+            <input type="radio" id="lessthan12" name="duration" value="lessthan12"> less than 12 minutes</label>
+        </div>
+        <br>
+        <input type="text" name="machinenumber" placeholder="machine number" formControlName="machinenumber">
+        <br>
+        <input type="text" name="unitweight" placeholder="unit weight" formControlName="unitweight">
+        <br>
+        <input type="text" name="bloodpressure" placeholder="blood pressure" formControlName="bloodpressure">
+        <br>
+        <input type="text" name="weight" placeholder="weight" formControlName="weight">
+        <br>
+        <p>unusual reaction:</p>
+        <div>
+          <label for="yes">     <input type="radio" id="yes" name="yes" value="yes"> yes</label>
+          <label for="no">
+            <input type="radio" id="no" name="no" value="no"> no</label>
+        </div>
+        <br>
+        <input type="submit" [disabled]="!form.valid" value="submit">
+      </form>
+    </div>
+  </div>
+</div>
+</body>

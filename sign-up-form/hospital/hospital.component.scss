@@ -1,0 +1,136 @@
+      .dlogin1{
+
+        position: relative;
+        width:450px;
+        height: 150px;
+        
+        
+        }
+        .PWD{
+            padding-top:10%;
+        }
+        .PWD > input
+        {
+            position: relative;
+            width:200px;
+            left:10px;
+        
+        }
+        .PWD > label{
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            
+        }
+        .HospitalDiv > select{
+            position: relative;
+            margin-left:15px;
+            left:15px;
+            font-size: 15px;
+            font-weight: bold;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            
+        }
+        .HospitalDiv > label{
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            
+        }
+        .UN{
+            padding-top:5%;
+        }
+        .UN > input
+        {
+            position: relative;
+            width:200px;
+            
+        
+        }
+        .UN > label{
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            
+        }
+        .dlogin2{
+        
+            position: relative;
+            width:450px;
+            height: 250px;
+            
+        .code{
+            padding-top:5%;
+            position: relative;
+            
+          }
+        
+        }
+        .code > input
+        {
+            position: relative;
+            width:200px;
+            left:60px;
+        
+        }
+        .code > label{
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            
+            
+        }
+        .buttons{
+            position: relative;
+            width:100px;
+            display: block;
+            height:120px;
+            margin-right: auto;
+            margin-left: auto;
+            top:25%;
+           
+            
+        
+        }
+        .buttons > .btn1
+        {
+            position: relative;
+            width:100px;
+            height:30px;
+            font-weight: bolder;
+        }
+        .buttons > .btn2
+        {
+            position: relative;
+            top:10%;
+            width:100px;
+            height:30px;
+            font-weight: bolder;
+        }
+        .buttons > .btn3
+        {
+            position: relative;
+            top:20%;
+            width:100px;
+            height:30px;
+            font-weight: bolder;
+        }
+        .message{
+            position: relative;
+            color:blue;
+            font-size: 15px;
+            font-style: bolder;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+
+        }
+        .messageDiv
+        {
+            margin-top:10px;
+        }
+        
+        
